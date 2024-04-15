@@ -2,7 +2,7 @@ import { Table } from '@radix-ui/themes'
 import Skeleton from 'react-loading-skeleton'
 import IssueActions from './IssueActions'
 
-const IssuesLoadingPage = () => {
+const LoadingIssuesPage = () => {
   const issues = [1, 2, 3, 4, 5]
 
   return (
@@ -43,4 +43,4 @@ const IssuesLoadingPage = () => {
   )
 }
 
-export default IssuesLoadingPage
+export default LoadingIssuesPage
