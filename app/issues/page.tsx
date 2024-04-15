@@ -2,7 +2,7 @@ import React from 'react'
 import { Button } from '@radix-ui/themes'
 import Link from 'next/link'
 
-const page = () => {
+const IssuesPage = () => {
   return (
     <div>
       <Button>
@@ -12,4 +12,4 @@ const page = () => {
   )
 }
 
-export default page
+export default IssuesPage
