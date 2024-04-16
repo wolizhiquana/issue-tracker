@@ -9,7 +9,7 @@ import classnames from 'classnames'
 const Navbar = () => {
   const links = [
     { lable: 'Dashboard', href: '/dashboard' },
-    { lable: 'Issues', href: '/issues' }
+    { lable: 'Issues', href: '/issues/list' }
   ]
 
   const pathname = usePathname()
