@@ -8,7 +8,7 @@ import { Issue, Status } from '@prisma/client'
 import { ArrowDownIcon, ArrowUpIcon } from '@radix-ui/react-icons'
 
 interface Props {
-  searchParams: { status: Status; orderBy: keyof Issue; desc: boolean }
+  searchParams: { status: Status; orderBy: keyof Issue; order: 'asc' | 'desc' }
 }
 
 const IssuesPage = async ({ searchParams }: Props) => {
@@ -23,8 +23,19 @@ const IssuesPage = async ({ searchParams }: Props) => {
     ? searchParams.status
     : undefined
 
+  const order = ['asc', 'desc'].includes(searchParams.order)
+    ? searchParams.order
+    : 'asc'
+
+  const orderBy = columns
+    .map((column) => column.value)
+    .includes(searchParams.orderBy)
+    ? { [searchParams.orderBy]: order }
+    : undefined
+
   const issues = await prisma.issue.findMany({
-    where: { status }
+    where: { status },
+    orderBy
   })
 
   return (
@@ -41,21 +52,21 @@ const IssuesPage = async ({ searchParams }: Props) => {
                     query: {
                       ...searchParams,
                       orderBy: column.value,
-                      desc:
+                      order:
                         column.value === searchParams.orderBy &&
-                        !searchParams.desc
-                          ? true
-                          : undefined
+                        searchParams.order === 'asc'
+                          ? 'desc'
+                          : 'asc'
                     }
                   }}
                 >
                   {column.lable}
                 </NextLink>
                 {column.value === searchParams.orderBy &&
-                  (searchParams.desc ? (
-                    <ArrowDownIcon className='inline' />
-                  ) : (
+                  (searchParams.order === 'asc' ? (
                     <ArrowUpIcon className='inline' />
+                  ) : (
+                    <ArrowDownIcon className='inline' />
                   ))}
               </Table.ColumnHeaderCell>
             ))}
