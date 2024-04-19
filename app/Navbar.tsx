@@ -56,7 +56,6 @@ const NavLinks = () => {
           </Link>
         </li>
       ))}
-      @
     </ul>
   )
 }
