@@ -15,7 +15,7 @@ const AssigneeSelect = () => {
     }
 
     fetchUsers()
-  }, [users])
+  }, [])
 
   return (
     <Select.Root>
